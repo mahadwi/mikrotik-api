@@ -1,0 +1,22 @@
+{
+  "name": "api-mikrotik",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "node-routeros": "^1.6.8",
+    "routeros-client": "^1.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
