@@ -13,8 +13,7 @@
   "description": "",
   "dependencies": {
     "express": "^5.1.0",
-    "node-routeros": "^1.6.8",
-    "routeros-client": "^1.1.2"
+    "node-routeros": "^1.6.8"
   },
   "devDependencies": {
     "nodemon": "^3.1.9"
