@@ -1,0 +1,12 @@
+services:
+  backend:
+    build:
+      context: .
+    image: mikrotik:1
+    container_name: mikrotikapi-backend
+    restart: unless-stopped
+    env_file: ./.env
+#    volumes:
+#      - ./logs:/app/logs
+    ports:
+      - 0.0.0.0:7000:5003
