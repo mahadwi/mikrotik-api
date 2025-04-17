@@ -1,8 +1,11 @@
 import { RouterOSAPI } from 'node-routeros';
+import key from './env.js';
+
+const { mikrotik } = key;
 
 export const getMikrotikConnection = () => new RouterOSAPI({
-  host: '10.110.16.1', // Ganti dengan IP MikroTik kamu
-  user: 'doni',
-  password: '@ndur$%1989',
-  port: 8728,
+  host: mikrotik.host, // Ganti dengan IP MikroTik kamu
+  user: mikrotik.user,
+  password: mikrotik.password,
+  port: mikrotik.port,
 });

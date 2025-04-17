@@ -4,8 +4,8 @@ export const getStatus = async () => {
   let client;
   try {
     client = await connectToApi();
-    await client.write('/system/resource/print');
-    return { connected: true, message: 'MikroTik connected' };
+    const result = await client.write('/system/resource/print');
+    return { connected: true, message: 'MikroTik connected', data: result };
   } catch (err) {
     console.log(err);
     
@@ -19,7 +19,7 @@ export const getActivePPP = async () => {
   let client;
   try {
     client = await connectToApi();
-    const result = await client.write('/ppp/active/print');
+    const result = await client.write('/ppp/secret/print');
     return result;
   } catch (err) {
     throw new Error('Gagal ambil user aktif: ' + err.message);
