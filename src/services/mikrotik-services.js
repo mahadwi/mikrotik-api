@@ -19,7 +19,7 @@ export const getActivePPP = async () => {
   let client;
   try {
     client = await connectToApi();
-    const result = await client.write('/ppp/secret/print');
+    const result = await client.write('/ppp/active/print');
     return result;
   } catch (err) {
     throw new Error('Gagal ambil user aktif: ' + err.message);
@@ -28,14 +28,30 @@ export const getActivePPP = async () => {
   }
 };
 
-export const disconnectPPPUser = async (id) => {
+export const disablePPPUser = async (name) => {
   let client;
   try {
     client = await connectToApi();
-    await client.write('/ppp/active/remove', [`.id=${id}`]);
-    return { success: true, message: `User ${id} disconnected` };
+
+    // 1. Disable secret
+    const secrets = await client.write('/ppp/secret/print', [`?name=${name}`]);
+    if (!secrets.length) throw new Error('User tidak ditemukan di secret');
+    await client.write('/ppp/secret/set', [
+      `=.id=${secrets[0]['.id']}`,
+      `=disabled=yes`
+    ]);
+
+    // 2. Disconnect jika sedang aktif
+    const active = await client.write('/ppp/active/print', [`?name=${name}`]);
+    if (active.length) {
+      await client.write('/ppp/active/remove', [
+        `=.id=${active[0]['.id']}`
+      ]);
+    }
+
+    return { success: true, message: `User ${name} telah diblokir dan disconnect` };
   } catch (err) {
-    throw new Error('Gagal disconnect user: ' + err.message);
+    throw new Error('Gagal memblokir user: ' + err.message);
   } finally {
     if (client) client.close();
   }
