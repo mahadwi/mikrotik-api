@@ -28,6 +28,45 @@ export const getActivePPP = async () => {
   }
 };
 
+export const getProfilePPP = async () => {
+  let client;
+  try {
+    client = await connectToApi();
+    const result = await client.write('/ppp/profile/print');
+    return result;
+  } catch (err) {
+    throw new Error('Gagal ambil profile: ' + err.message);
+  } finally {
+    if (client) client.close();
+  }
+};
+
+export const getSecretPPP = async () => {
+  let client;
+  try {
+    client = await connectToApi();
+    const result = await client.write('/ppp/secret/print');
+    return result;
+  } catch (err) {
+    throw new Error('Gagal ambil Secret: ' + err.message);
+  } finally {
+    if (client) client.close();
+  }
+};
+
+export const getInterface = async () => {
+  let client;
+  try {
+    client = await connectToApi();
+    const result = await client.write('/interface/print');
+    return result;
+  } catch (err) {
+    throw new Error('Gagal ambil Interface: ' + err.message);
+  } finally {
+    if (client) client.close();
+  }
+};
+
 export const disablePPPUser = async (name) => {
   let client;
   try {
