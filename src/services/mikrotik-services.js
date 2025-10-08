@@ -1,67 +1,65 @@
 import { connectToApi } from '../helpers/mikrotik-helpers.js';
 
-export const getStatus = async () => {
+export const getStatus = async (router) => {
   let client;
   try {
-    client = await connectToApi();
+    client = await connectToApi(router);
     const result = await client.write('/system/resource/print');
     return { connected: true, message: 'MikroTik connected', data: result };
   } catch (err) {
-    console.log(err);
-    
     return { connected: false, message: 'Failed to connect', error: err.message };
   } finally {
     if (client) client.close();
   }
 };
 
-export const getActivePPP = async () => {
+export const getActivePPP = async (router) => {
   let client;
   try {
-    client = await connectToApi();
+    client = await connectToApi(router);
     const result = await client.write('/ppp/active/print');
-    return result;
+    return { connected: true, message: 'MikroTik connected', data: result };
   } catch (err) {
-    throw new Error('Gagal ambil user aktif: ' + err.message);
+    return { connected: false, message: 'Failed to connect', error: err.message };
   } finally {
     if (client) client.close();
   }
 };
 
-export const getProfilePPP = async () => {
+export const getProfilePPP = async (router) => {
   let client;
   try {
-    client = await connectToApi();
+    client = await connectToApi(router);
     const result = await client.write('/ppp/profile/print');
-    return result;
+    return { connected: true, message: 'MikroTik connected', data: result };
   } catch (err) {
-    throw new Error('Gagal ambil profile: ' + err.message);
+    return { connected: false, message: 'Failed to connect', error: err.message };
   } finally {
     if (client) client.close();
   }
 };
 
-export const getSecretPPP = async () => {
+export const getSecretPPP = async (router) => {
   let client;
   try {
-    client = await connectToApi();
+    client = await connectToApi(router);
     const result = await client.write('/ppp/secret/print');
-    return result;
+    return { connected: true, message: 'MikroTik connected', data: result };
   } catch (err) {
-    throw new Error('Gagal ambil Secret: ' + err.message);
+    return { connected: false, message: 'Failed to connect', error: err.message };
   } finally {
     if (client) client.close();
   }
 };
 
-export const getInterface = async () => {
+export const getInterface = async (router) => {
   let client;
   try {
-    client = await connectToApi();
+    client = await connectToApi(router);
     const result = await client.write('/interface/print');
-    return result;
+    return { connected: true, message: 'MikroTik connected', data: result };
   } catch (err) {
-    throw new Error('Gagal ambil Interface: ' + err.message);
+    return { connected: false, message: 'Failed to connect', error: err.message };
   } finally {
     if (client) client.close();
   }
