@@ -4,12 +4,12 @@ import injectRouterConfig  from '../middleware/injectRouterConfig.js';
 
 const apiRouter = express.Router();
 
-apiRouter.get('/api/status', injectRouterConfig, controller.getStatusController);
-apiRouter.get('/api/ppp/active', injectRouterConfig, controller.getActivePPPController);
-apiRouter.get('/api/ppp/profile', injectRouterConfig, controller.getPPPProfileController);
-apiRouter.get('/api/ppp/secret', injectRouterConfig, controller.getPPPSecretController);
+apiRouter.post('/api/status', injectRouterConfig, controller.getStatusController);
+apiRouter.post('/api/ppp/active', injectRouterConfig, controller.getActivePPPController);
+apiRouter.post('/api/ppp/profile', injectRouterConfig, controller.getPPPProfileController);
+apiRouter.post('/api/ppp/secret', injectRouterConfig, controller.getPPPSecretController);
 apiRouter.post('/api/ppp/disconnect', injectRouterConfig, controller.disablePPPUserController);
 
-apiRouter.get('/api/interface', injectRouterConfig, controller.getInterfaceController);
+apiRouter.post('/api/interface', injectRouterConfig, controller.getInterfaceController);
 
 export default apiRouter;
